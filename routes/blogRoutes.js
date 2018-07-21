@@ -15,7 +15,6 @@ module.exports = (app) => {
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
-
     // const blogsCacheKey = `${req.user.id}Blog`;
 
     // const cachedBlogs = await client.get(blogsCacheKey);
@@ -40,7 +39,7 @@ module.exports = (app) => {
     const blog = new Blog({
       title,
       content,
-      _user: req.user.id
+      _user: req.user.id,
     });
 
     try {

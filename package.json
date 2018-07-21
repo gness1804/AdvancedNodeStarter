@@ -12,6 +12,7 @@
     "heroku-postbuild": "npm run build",
     "redis:clean": "node services/redisClean.js",
     "lint": "eslint --ext .js .",
+    "lint:fix": "eslint -- --fix",
     "test": "echo 'No tests yet...'"
   },
   "author": "",
