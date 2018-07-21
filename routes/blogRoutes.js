@@ -14,22 +14,8 @@ module.exports = (app) => {
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
-    // const blogsCacheKey = `${req.user.id}Blog`;
-
-    // const cachedBlogs = await client.get(blogsCacheKey);
-
-    // if (cachedBlogs) {
-    //   console.log('serving from cache');
-    //   return res.send(JSON.parse(cachedBlogs));
-    // }
-
-    // console.log('serving from mongodb');
-
     const blogs = await Blog.find({ _user: req.user.id });
-
     res.send(blogs);
-
-    // client.set(blogsCacheKey, JSON.stringify(blogs));
   });
 
   app.post('/api/blogs', requireLogin, async (req, res) => {
