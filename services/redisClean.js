@@ -1,3 +1,6 @@
+process.stderr.write('Error: redisClean file is currently under construction and not working.');
+process.exit(1);
+
 // const util = require('util');
 // const client = require('./redis');
 

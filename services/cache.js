@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const { exec } = mongoose.Query.prototype;
 
 mongoose.Query.prototype.exec = function (...args) {
+  // const key = Object.assign({}, this.getQuery(), {
+  //   collection: this.mongooseCollection.name,
+  // });
   return exec.apply(this, args);
 };
 
@@ -23,10 +26,10 @@ mongoose.Query.prototype.exec = function (...args) {
 // const cachedBlogs = await client.get(blogsCacheKey);
 
 // if (cachedBlogs) {
-//   console.log('serving from cache');
+//
 //   return res.send(JSON.parse(cachedBlogs));
 // }
 
-// console.log('serving from mongodb');
+//
 
 // client.set(blogsCacheKey, JSON.stringify(blogs));
