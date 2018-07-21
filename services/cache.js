@@ -13,13 +13,13 @@ mongoose.Query.prototype.exec = async function (...args) {
     collection: this.mongooseCollection.name,
   }));
 
+  /* eslint-disable new-cap */
   const matchingCachedData = await client.get(key);
 
-  /* eslint-disable new-cap */
   // get the data out of redis cache if data exists
   if (matchingCachedData) {
-    const mongoDoc = new this.model(JSON.parse(matchingCachedData));
-    return mongoDoc;
+    const rawData = JSON.parse(matchingCachedData);
+    return Array.isArray(rawData) ? rawData.map(d => new this.model(d)) : new this.model(rawData);
   }
   /* eslint-enable new-cap */
 
