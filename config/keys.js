@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 if (process.env.NODE_ENV === 'production') {
   module.exports = require('./prod');
 } else if (process.env.NODE_ENV === 'ci') {
@@ -5,3 +7,5 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   module.exports = require('./dev');
 }
+
+/* eslint-enable */

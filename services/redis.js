@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const exec = mongoose.Query.prototype.exec;
+const { exec } = mongoose.Query.prototype;
 
-mongoose.Query.prototype.exec = function () {
-  return exec.apply(this, arguments);
+mongoose.Query.prototype.exec = function (...args) {
+  return exec.apply(this, args);
 };
 
 const redis = require('redis');

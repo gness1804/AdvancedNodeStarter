@@ -33,9 +33,9 @@ passport.use(
           googleId: profile.id,
           displayName: profile.displayName,
         }).save();
-        done(null, user);
+        return done(null, user);
       } catch (err) {
-        done(err, null);
+        return done(err, null);
       }
     },
   ),
