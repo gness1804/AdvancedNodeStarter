@@ -3,5 +3,5 @@ module.exports = (req, res, next) => {
     return res.status(401).send({ error: 'You must log in!' });
   }
 
-  next();
+  return next();
 };

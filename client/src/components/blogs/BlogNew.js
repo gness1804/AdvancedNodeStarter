@@ -33,5 +33,5 @@ class BlogNew extends Component {
 }
 
 export default reduxForm({
-  form: 'blogForm'
+  form: 'blogForm',
 })(BlogNew);
