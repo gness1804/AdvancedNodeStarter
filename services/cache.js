@@ -3,8 +3,14 @@ const client = require('../config/redisConfig');
 
 const { exec } = mongoose.Query.prototype;
 
-mongoose.Query.prototype.cache = function () {
+mongoose.Query.prototype.cache = function (options = {}) {
+  const { key } = options;
+  if (!key) {
+    console.error('Error: the options object passed into the cache method must have a key property.');
+    return this;
+  }
   this.useCache = true;
+  this.hashKey = JSON.stringify(key);
   return this;
 };
 
@@ -22,7 +28,7 @@ mongoose.Query.prototype.exec = async function (...args) {
     return _data.map(d => new this.model(d));
   };
 
-  const matchingCachedData = await client.get(key);
+  const matchingCachedData = await client.hget(this.hashKey, key);
 
   // get the data out of redis cache if data exists
   if (matchingCachedData) {
@@ -34,6 +40,6 @@ mongoose.Query.prototype.exec = async function (...args) {
   // runs the actual MongoDB query if no cached data is found
   // and sets the cache key value in redis
   const result = await exec.apply(this, args);
-  client.set(key, JSON.stringify(result), 'EX', 60);
+  client.hset(this.hashKey, key, JSON.stringify(result), 'EX', 60);
   return result;
 };
