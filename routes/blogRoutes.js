@@ -13,6 +13,14 @@ module.exports = (app) => {
     res.send(blog);
   });
 
+  app.delete('/api/blogs/:id', requireLogin, async (req, res) => {
+    const blog = await Blog.deleteOne({
+      _user: req.user.id,
+      _id: req.params.id,
+    });
+    res.send(blog);
+  });
+
   app.get('/api/blogs', requireLogin, async (req, res) => {
     // const blogsCacheKey = `${req.user.id}Blog`;
 
