@@ -1,15 +1,9 @@
-process.stderr.write('Error: redisClean file is currently under construction and not working.');
-process.exit(1);
+const client = require('../config/redisConfig');
 
-// const util = require('util');
-// const client = require('./redis');
+const clearCache = async () => {
+  await client.flushall();
+  process.stdout.write('Redis cache cleaned.');
+  process.exit(0);
+};
 
-// client.flushall = util.promisify(client.flushall);
-
-// const clearCache = async () => {
-//   await client.flushall();
-//   process.stdout.write('Redis cache cleaned.');
-//   process.exit(0);
-// };
-
-// clearCache();
+clearCache();
