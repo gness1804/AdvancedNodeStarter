@@ -13,7 +13,6 @@ mongoose.Query.prototype.exec = async function (...args) {
     return exec.apply(this, args);
   }
 
-
   const key = JSON.stringify(Object.assign({}, this.getQuery(), {
     collection: this.mongooseCollection.name,
   }));
@@ -35,6 +34,6 @@ mongoose.Query.prototype.exec = async function (...args) {
   // runs the actual MongoDB query if no cached data is found
   // and sets the cache key value in redis
   const result = await exec.apply(this, args);
-  client.set(key, JSON.stringify(result));
+  client.set(key, JSON.stringify(result), 'EX', 60);
   return result;
 };
