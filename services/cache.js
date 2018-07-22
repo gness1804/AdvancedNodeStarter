@@ -3,7 +3,17 @@ const client = require('../config/redisConfig');
 
 const { exec } = mongoose.Query.prototype;
 
+mongoose.Query.prototype.cache = function () {
+  this.useCache = true;
+  return this;
+};
+
 mongoose.Query.prototype.exec = async function (...args) {
+  if (!this.useCache) {
+    return exec.apply(this, args);
+  }
+
+
   const key = JSON.stringify(Object.assign({}, this.getQuery(), {
     collection: this.mongooseCollection.name,
   }));
