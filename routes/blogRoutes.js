@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const { clearHash } = require('../services/cache');
+const deleteUserCache = require('../middlewares/deleteUserCache');
 
 const Blog = mongoose.model('Blog');
 
@@ -14,14 +14,13 @@ module.exports = (app) => {
     res.send(blog);
   });
 
-  app.delete('/api/blogs/:id', requireLogin, async (req, res) => {
+  app.delete('/api/blogs/:id', requireLogin, deleteUserCache, async (req, res) => {
     const { id } = req.user;
     const blog = await Blog.deleteOne({
       _user: id,
       _id: req.params.id,
     });
     res.send(blog);
-    clearHash(id);
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
@@ -32,9 +31,8 @@ module.exports = (app) => {
     res.send(blogs);
   });
 
-  app.post('/api/blogs', requireLogin, async (req, res) => {
+  app.post('/api/blogs', requireLogin, deleteUserCache, async (req, res) => {
     const { title, content } = req.body;
-    const { id } = req.user;
 
     const blog = new Blog({
       title,
@@ -48,7 +46,5 @@ module.exports = (app) => {
     } catch (err) {
       res.send(400, err);
     }
-
-    clearHash(id);
   });
 };
