@@ -1,7 +1,4 @@
-const util = require('util');
-const client = require('./redis');
-
-client.flushall = util.promisify(client.flushall);
+const client = require('../config/redisConfig');
 
 const clearCache = async () => {
   await client.flushall();

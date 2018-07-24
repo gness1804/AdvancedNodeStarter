@@ -1,4 +1,5 @@
 // BlogNew shows BlogForm and BlogFormReview
+/* eslint-disable */
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import BlogForm from './BlogForm';
