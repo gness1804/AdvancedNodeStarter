@@ -15,11 +15,13 @@ module.exports = (app) => {
   });
 
   app.delete('/api/blogs/:id', requireLogin, async (req, res) => {
+    const { id } = req.user;
     const blog = await Blog.deleteOne({
-      _user: req.user.id,
+      _user: id,
       _id: req.params.id,
     });
     res.send(blog);
+    clearHash(id);
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
