@@ -1,9 +1,9 @@
 const { clearHash } = require('../services/cache');
 
-const deleteUserCache = (req, res, next) => {
+const deleteUserCache = async (req, res, next) => {
+  await next();
   const { id } = req.user;
   clearHash(id);
-  return next();
 };
 
 module.exports = deleteUserCache;
