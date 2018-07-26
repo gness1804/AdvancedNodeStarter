@@ -1,5 +1,6 @@
-/* global it, describe, expect, beforeEach, afterEach */
+/* global it, describe, expect, beforeEach, afterEach, afterAll */
 const puppeteer = require('puppeteer');
+const { exec } = require('child_process');
 
 describe('Home page', () => {
   let page;
@@ -15,6 +16,10 @@ describe('Home page', () => {
 
   afterEach(() => {
     browser.close();
+  });
+
+  afterAll(() => {
+    exec('npm run test:kill');
   });
 
   it('has the correct headline text', async () => {
