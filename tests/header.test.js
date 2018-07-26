@@ -31,4 +31,11 @@ describe('Home page', () => {
     const text = await page.$eval('a.login-link', el => el.innerHTML);
     expect(text).toEqual('Login With Google');
   });
+
+  it('clicking on the log in link starts oauth flow', async () => {
+    await page.click('a.login-link');
+    const url = await page.url();
+    const regex = new RegExp('^https://accounts.google.com');
+    expect(regex.test(url)).toEqual(true);
+  });
 });
