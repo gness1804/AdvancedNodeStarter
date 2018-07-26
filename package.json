@@ -13,7 +13,9 @@
     "cache:clean": "node services/redisClean.js",
     "lint": "eslint --ext .js .",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest"
+    "test": "bash scripts/launchTests.sh",
+    "opensite": "open https://www.udemy.com/advanced-node-for-developers/learn/v4/content",
+    "test:kill": "pgrep 'Chromium' | xargs kill -sigterm"
   },
   "author": "",
   "license": "ISC",
