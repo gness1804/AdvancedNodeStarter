@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
   renderContent() {
-    switch (this.props.auth) {
+    const { auth } = this.props;
+    switch (auth) {
       case null:
         return;
       case false:
@@ -26,16 +27,18 @@ class Header extends Component {
   }
 
   render() {
+    const { auth } = this.props;
     return (
       <nav className="indigo">
         <div className="nav-wrapper">
           <Link
-            to={this.props.auth ? '/blogs' : '/'}
+            to={auth ? '/blogs' : '/'}
             className="left brand-logo"
             style={{ marginLeft: '10px' }}
           >
             Blogster
           </Link>
+          {auth ? <p style={{ position: 'absolute', left: '300px' }}>Logged is as: {auth.displayName}</p> : ''}
           <ul className="right">{this.renderContent()}</ul>
         </div>
       </nav>
