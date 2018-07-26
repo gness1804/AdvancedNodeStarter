@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import RightLinks from './RightLinks';
 
 class Header extends Component {
   renderContent() {
@@ -15,14 +16,7 @@ class Header extends Component {
           </li>
         );
       default:
-        return [
-          <li key="3" style={{ margin: '0 10px' }}>
-            <Link to="/blogs">My Blogs</Link>
-          </li>,
-          <li key="2">
-            <a href={'/auth/logout'}>Logout</a>
-          </li>,
-        ];
+        return <RightLinks />;
     }
   }
 
