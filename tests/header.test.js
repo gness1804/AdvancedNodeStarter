@@ -3,9 +3,10 @@ const puppeteer = require('puppeteer');
 
 describe('Home page', () => {
   let page;
+  let browser;
 
   beforeEach(async () => {
-    const browser = await puppeteer.launch({
+    browser = await puppeteer.launch({
       headless: false,
     });
     page = await browser.newPage();
