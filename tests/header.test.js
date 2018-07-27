@@ -1,22 +1,22 @@
 /* global it, describe, expect, beforeEach, afterEach, afterAll */
 const puppeteer = require('puppeteer');
 const { exec } = require('child_process');
-const { Buffer } = require('safe-buffer');
-const Keygrip = require('keygrip');
-const { mLabId, cookieKey } = require('../config/keys');
+const { sessionStr, sig } = require('../config/test_config/fakeLoginConfig');
 
 describe('Home page', () => {
   let page;
   let browser;
-  const id = mLabId;
-  const sessionObj = {
-    passport: {
-      user: id,
-    },
+
+  const setCookies = async () => {
+    await page.setCookie({
+      name: 'session',
+      value: sessionStr,
+    });
+    await page.setCookie({
+      name: 'session.sig',
+      value: sig,
+    });
   };
-  const sessionStr = Buffer.from(JSON.stringify(sessionObj)).toString('base64');
-  const keygrip = new Keygrip([cookieKey]);
-  const sig = keygrip.sign(`session=${sessionStr}`);
 
   beforeEach(async () => {
     browser = await puppeteer.launch({
@@ -52,15 +52,14 @@ describe('Home page', () => {
   });
 
   it('shows logout button when signed in', async () => {
-    await page.setCookie({
-      name: 'session',
-      value: sessionStr,
-    });
-    await page.setCookie({
-      name: 'session.sig',
-      value: sig,
-    });
+    setCookies();
     await page.goto('localhost:3000/');
     // expect logout button to appear..
   });
+
+  // it('shows the "Logged in as..." text once logged in', () => {
+  // setCookies();
+  // await page.goto('localhost:3000/');
+  // expect logged in text to appear...
+  // });
 });
