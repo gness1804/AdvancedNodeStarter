@@ -52,6 +52,15 @@ describe('Home page', () => {
   });
 
   it('shows logout button when signed in', async () => {
-    expect(sig).toBeDefined();
+    await page.setCookie({
+      name: 'session',
+      value: sessionStr,
+    });
+    await page.setCookie({
+      name: 'session.sig',
+      value: sig,
+    });
+    await page.goto('localhost:3000/');
+    // expect logout button to appear..
   });
 });
