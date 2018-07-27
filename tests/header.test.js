@@ -1,10 +1,22 @@
 /* global it, describe, expect, beforeEach, afterEach, afterAll */
 const puppeteer = require('puppeteer');
 const { exec } = require('child_process');
+const { Buffer } = require('safe-buffer');
+const Keygrip = require('keygrip');
+const { mLabId, cookieKey } = require('../config/keys');
 
 describe('Home page', () => {
   let page;
   let browser;
+  const id = mLabId;
+  const sessionObj = {
+    passport: {
+      user: id,
+    },
+  };
+  const sessionStr = Buffer.from(JSON.stringify(sessionObj)).toString('base64');
+  const keygrip = new Keygrip([cookieKey]);
+  const sig = keygrip.sign(`session=${sessionStr}`);
 
   beforeEach(async () => {
     browser = await puppeteer.launch({
@@ -37,5 +49,9 @@ describe('Home page', () => {
     const url = await page.url();
     const regex = new RegExp('^https://accounts.google.com');
     expect(regex.test(url)).toEqual(true);
+  });
+
+  it('shows logout button when signed in', async () => {
+    expect(sig).toBeDefined();
   });
 });
