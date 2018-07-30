@@ -71,9 +71,12 @@ describe('Home page', () => {
     expect(text).toEqual('Logout');
   });
 
-  // it('shows the "Logged in as..." text once logged in', () => {
-  // setCookies();
-  // await page.goto('localhost:3000/');
-  // expect logged in text to appear...
-  // });
+  it('shows logged in as button when signed in', async () => {
+    const elem = 'p.logged-in-as-elem';
+    await setCookies();
+    await page.goto('localhost:3000/');
+    await page.waitFor(elem);
+    const text = await page.$eval(elem, el => el.innerHTML);
+    expect(text.trim()).toEqual('Logged is as: Graham Nessler');
+  });
 });
