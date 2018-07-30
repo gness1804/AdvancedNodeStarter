@@ -16,8 +16,8 @@
     "test": "bash scripts/launchTests.sh",
     "opensite": "open https://www.udemy.com/advanced-node-for-developers/learn/v4/content",
     "test:killall": "pgrep 'Chromium' | xargs kill -sigterm && echo 'Closed Chromium windows.'",
-    "test:noclose": "bash scripts/disableBrowserClose.sh",
-    "test:reclose": "bash scripts/enableBrowserClose.sh"
+    "test:open": "echo 'open' > .TEST-STATUS && echo 'Leaving Chromium windows open.'",
+    "test:close": "echo 'close' > .TEST-STATUS && echo 'Closing Chromium windows.'"
   },
   "author": "",
   "license": "ISC",

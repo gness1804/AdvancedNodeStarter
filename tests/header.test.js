@@ -1,6 +1,6 @@
 /* global it, describe, expect, beforeEach, afterEach, afterAll */
 const puppeteer = require('puppeteer');
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 const { sessionStr, sig } = require('../config/test_config/fakeLoginConfig');
 
 describe('Home page', () => {
@@ -26,12 +26,18 @@ describe('Home page', () => {
     await page.goto('localhost:3000/');
   });
 
-  afterEach(() => {
-    browser.close();
+  afterEach(async () => {
+    const status = await execSync('cat .TEST-STATUS').toString().trim();
+    if (status === 'close') {
+      browser.close();
+    }
   });
 
-  afterAll(() => {
-    exec('npm run test:killall');
+  afterAll(async () => {
+    const status = await execSync('cat .TEST-STATUS').toString().trim();
+    if (status === 'close') {
+      exec('npm run test:killall');
+    }
   });
 
   it('has the correct headline text', async () => {
