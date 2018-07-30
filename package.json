@@ -15,7 +15,9 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "bash scripts/launchTests.sh",
     "opensite": "open https://www.udemy.com/advanced-node-for-developers/learn/v4/content",
-    "test:kill": "pgrep 'Chromium' | xargs kill -sigterm && echo 'Closed Chromium windows.'"
+    "test:kill": "pgrep 'Chromium' | xargs kill -sigterm && echo 'Closed Chromium windows.'",
+    "test:noclose": "bash scripts/disableBrowserClose.sh",
+    "test:reclose": "bash scripts/enableBrowserClose.sh"
   },
   "author": "",
   "license": "ISC",

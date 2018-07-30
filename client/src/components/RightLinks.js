@@ -7,7 +7,7 @@ const RightLinks = () => {
       <Link to="/blogs">My Blogs</Link>
     </li>,
     <li key="2">
-      <a href={'/auth/logout'}>Logout</a>
+      <a href={'/auth/logout'} className="logout-button">Logout</a>
     </li>,
   ];
 }
