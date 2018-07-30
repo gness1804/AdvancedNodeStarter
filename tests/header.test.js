@@ -31,7 +31,7 @@ describe('Home page', () => {
   });
 
   afterAll(() => {
-    exec('npm run test:kill');
+    exec('npm run test:killall');
   });
 
   it('has the correct headline text', async () => {
@@ -52,9 +52,12 @@ describe('Home page', () => {
   });
 
   it('shows logout button when signed in', async () => {
-    setCookies();
+    const elem = 'a.logout-button';
+    await setCookies();
     await page.goto('localhost:3000/');
-    // expect logout button to appear..
+    await page.waitFor(elem);
+    const text = await page.$eval(elem, el => el.innerHTML);
+    expect(text).toEqual('Logout');
   });
 
   // it('shows the "Logged in as..." text once logged in', () => {
