@@ -1,4 +1,4 @@
-/* global it, describe, expect, beforeEach, afterEach, afterAll */
+/* global it, describe, expect, beforeEach, afterEach, afterAll, beforeAll */
 const puppeteer = require('puppeteer');
 const { exec, execSync } = require('child_process');
 const { sessionStr, sig } = require('../config/test_config/fakeLoginConfig');
@@ -17,6 +17,11 @@ describe('Home page', () => {
       value: sig,
     });
   };
+
+  beforeAll(async () => {
+    const status = await execSync('cat .TEST-STATUS').toString().trim();
+    console.log(`Chromium windows' status set to: ${status}`);
+  });
 
   beforeEach(async () => {
     browser = await puppeteer.launch({
