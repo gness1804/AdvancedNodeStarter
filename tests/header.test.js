@@ -1,7 +1,7 @@
 /* global it, describe, expect, beforeEach, afterEach, afterAll, beforeAll */
 const puppeteer = require('puppeteer');
 const { exec, execSync } = require('child_process');
-const { sessionStr, sig } = require('../config/test_config/fakeLoginConfig');
+const { session, sig } = require('../config/test_config/fakeLoginConfig');
 
 describe('Home page', () => {
   let page;
@@ -10,7 +10,7 @@ describe('Home page', () => {
   const setCookies = async () => {
     await page.setCookie({
       name: 'session',
-      value: sessionStr,
+      value: session,
     });
     await page.setCookie({
       name: 'session.sig',

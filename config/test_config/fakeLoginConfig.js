@@ -8,11 +8,11 @@ const sessionObj = {
     user: id,
   },
 };
-const sessionStr = Buffer.from(JSON.stringify(sessionObj)).toString('base64');
+const session = Buffer.from(JSON.stringify(sessionObj)).toString('base64');
 const keygrip = new Keygrip([cookieKey]);
-const sig = keygrip.sign(`session=${sessionStr}`);
+const sig = keygrip.sign(`session=${session}`);
 
 module.exports = {
-  sessionStr,
+  session,
   sig,
 };
