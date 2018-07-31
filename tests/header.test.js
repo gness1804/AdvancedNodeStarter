@@ -1,7 +1,7 @@
 /* global it, describe, expect, beforeEach, afterEach, afterAll, beforeAll */
 const puppeteer = require('puppeteer');
 const { exec, execSync } = require('child_process');
-const { session, sig } = require('../config/test_config/fakeLoginConfig');
+const { session, sig } = require('../tests/config/login');
 
 describe('Home page', () => {
   let page;
