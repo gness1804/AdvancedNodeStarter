@@ -1,13 +1,16 @@
 /* global it, describe, expect, beforeEach, afterEach, afterAll, beforeAll */
 const puppeteer = require('puppeteer');
 const { exec, execSync } = require('child_process');
-const { session, sig } = require('../tests/config/login');
+const createSession = require('../tests/config/login');
+const createUser = require('../tests/config/user');
 
 describe('Home page', () => {
   let page;
   let browser;
 
   const setCookies = async () => {
+    const user = await createUser();
+    const { session, sig } = createSession(user);
     await page.setCookie({
       name: 'session',
       value: session,
@@ -77,6 +80,6 @@ describe('Home page', () => {
     await page.goto('localhost:3000/');
     await page.waitFor(elem);
     const text = await page.$eval(elem, el => el.innerHTML);
-    expect(text.trim()).toEqual('Logged is as: Graham Nessler');
+    expect(text.trim()).toEqual('Logged is as: Dwayne Johnson');
   });
 });
