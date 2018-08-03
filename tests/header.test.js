@@ -1,12 +1,11 @@
-/* global it, describe, expect, beforeEach, afterEach, afterAll, beforeAll */
-const puppeteer = require('puppeteer');
-const { exec, execSync } = require('child_process');
+/* global it, describe, expect, beforeEach, afterEach, beforeAll */
+const { execSync } = require('child_process');
 const createSession = require('../tests/config/login');
 const createUser = require('../tests/config/user');
+const Page = require('./helpers/page');
 
 describe('Home page', () => {
   let page;
-  let browser;
 
   const setCookies = async () => {
     const user = await createUser();
@@ -27,24 +26,14 @@ describe('Home page', () => {
   });
 
   beforeEach(async () => {
-    browser = await puppeteer.launch({
-      headless: false,
-    });
-    page = await browser.newPage();
+    page = await Page.build();
     await page.goto('localhost:3000/');
   });
 
   afterEach(async () => {
     const status = await execSync('cat .TEST-STATUS').toString().trim();
     if (status === 'close') {
-      browser.close();
-    }
-  });
-
-  afterAll(async () => {
-    const status = await execSync('cat .TEST-STATUS').toString().trim();
-    if (status === 'close') {
-      exec('npm run test:killall');
+      page.close();
     }
   });
 
