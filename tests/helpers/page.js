@@ -1,4 +1,6 @@
 const puppeteer = require('puppeteer');
+const createSession = require('../config/login');
+const createUser = require('../config/user');
 
 class CustomPage {
   static async build() {
@@ -13,6 +15,21 @@ class CustomPage {
         return customPage[property] || browser[property] || page[property];
       },
     });
+  }
+
+  async login(elem) {
+    const user = await createUser();
+    const { session, sig } = createSession(user);
+    await this.setCookie({
+      name: 'session',
+      value: session,
+    });
+    await this.setCookie({
+      name: 'session.sig',
+      value: sig,
+    });
+    await this.goto('localhost:3000/');
+    await this.waitFor(elem);
   }
 
   constructor(page) {

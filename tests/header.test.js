@@ -1,24 +1,9 @@
 /* global it, describe, expect, beforeEach, afterEach, beforeAll */
 const { execSync } = require('child_process');
-const createSession = require('../tests/config/login');
-const createUser = require('../tests/config/user');
 const Page = require('./helpers/page');
 
 describe('Home page', () => {
   let page;
-
-  const setCookies = async () => {
-    const user = await createUser();
-    const { session, sig } = createSession(user);
-    await page.setCookie({
-      name: 'session',
-      value: session,
-    });
-    await page.setCookie({
-      name: 'session.sig',
-      value: sig,
-    });
-  };
 
   beforeAll(async () => {
     const status = await execSync('cat .TEST-STATUS').toString().trim();
@@ -56,18 +41,14 @@ describe('Home page', () => {
 
   it('shows logout button when signed in', async () => {
     const elem = 'a.logout-button';
-    await setCookies();
-    await page.goto('localhost:3000/');
-    await page.waitFor(elem);
+    await page.login(elem);
     const text = await page.$eval(elem, el => el.innerHTML);
     expect(text).toEqual('Logout');
   });
 
   it('shows logged in as button when signed in', async () => {
     const elem = 'p.logged-in-as-elem';
-    await setCookies();
-    await page.goto('localhost:3000/');
-    await page.waitFor(elem);
+    await page.login(elem);
     const text = await page.$eval(elem, el => el.innerHTML);
     expect(text.trim()).toEqual('Logged is as: Dwayne Johnson');
   });
