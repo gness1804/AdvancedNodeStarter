@@ -17,7 +17,7 @@
     "lint": "eslint --ext .js .",
     "lint:fix": "npm run lint -- --fix",
     "test": "bash scripts/launchTests.sh",
-    "opensite": "open https://www.udemy.com/advanced-node-for-developers/learn/v4/content",
+    "site:open": "open https://www.udemy.com/advanced-node-for-developers/learn/v4/content",
     "test:killall": "pgrep 'Chromium' | xargs kill -sigterm && echo 'Closed Chromium windows.'",
     "test:open": "echo 'open' > .TEST-STATUS && echo 'Leaving Chromium windows open.'",
     "test:close": "echo 'close' > .TEST-STATUS && echo 'Closing Chromium windows.'",
