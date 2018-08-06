@@ -32,6 +32,11 @@ class CustomPage {
     await this.waitFor(elem);
   }
 
+  async getContents(elem) {
+    const target = await this.$eval(elem, el => el.innerHTML);
+    return target;
+  }
+
   constructor(page) {
     this.page = page;
   }

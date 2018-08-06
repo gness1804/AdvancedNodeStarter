@@ -23,12 +23,14 @@ describe('Home page', () => {
   });
 
   it('has the correct headline text', async () => {
-    const text = await page.$eval('a.brand-logo', el => el.innerHTML);
+    const elem = 'a.brand-logo';
+    const text = await page.getContents(elem);
     expect(text).toEqual('Blogster');
   });
 
   it('Log in link has the correct text (logged out by default)', async () => {
-    const text = await page.$eval('a.login-link', el => el.innerHTML);
+    const elem = 'a.login-link';
+    const text = await page.getContents(elem);
     expect(text).toEqual('Login With Google');
   });
 
@@ -42,14 +44,14 @@ describe('Home page', () => {
   it('shows logout button when signed in', async () => {
     const elem = 'a.logout-button';
     await page.login(elem);
-    const text = await page.$eval(elem, el => el.innerHTML);
+    const text = await page.getContents(elem);
     expect(text).toEqual('Logout');
   });
 
   it('shows logged in as button when signed in', async () => {
     const elem = 'p.logged-in-as-elem';
     await page.login(elem);
-    const text = await page.$eval(elem, el => el.innerHTML);
+    const text = await page.getContents(elem);
     expect(text.trim()).toEqual('Logged is as: Dwayne Johnson');
   });
 });
