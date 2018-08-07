@@ -3,7 +3,7 @@
 
 if lsof -Pi :3000 -sTCP:LISTEN -t >/dev/null; then
     echo "Running tests..."
-    jest
+    jest $*
 else
     echo "Oops! You need to be running a dev server on port 3000. Please try again."
 fi

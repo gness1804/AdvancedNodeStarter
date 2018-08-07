@@ -17,7 +17,7 @@ class CustomPage {
     });
   }
 
-  async login(elem) {
+  async login(elem, route) {
     const user = await createUser();
     const { session, sig } = createSession(user);
     await this.setCookie({
@@ -28,8 +28,10 @@ class CustomPage {
       name: 'session.sig',
       value: sig,
     });
-    await this.goto('localhost:3000/');
-    await this.waitFor(elem);
+    await this.goto(`localhost:3000${route || ''}`);
+    if (elem) {
+      await this.waitFor(elem);
+    }
   }
 
   async getContents(elem) {
