@@ -54,16 +54,4 @@ describe('Home page', () => {
     const text = await page.getContents(elem);
     expect(text.trim()).toEqual('Logged is as: Dwayne Johnson');
   });
-
-  it('user flow of going to the new blog creation page works', async () => {
-    const myBlogsElem = 'a.my-blogs-link';
-    const buttonElem = 'a.btn-large';
-    const targetElem = 'div.title label';
-    await page.login(myBlogsElem);
-    await page.click(myBlogsElem);
-    await page.waitFor(buttonElem);
-    await page.click(buttonElem);
-    const text = await page.getContents(targetElem);
-    expect(text.trim()).toEqual('Blog Title');
-  });
 });
