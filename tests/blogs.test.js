@@ -31,4 +31,15 @@ describe('blogs', () => {
     const text = await page.getContents(targetElem);
     expect(text.trim()).toEqual('Blog Title');
   });
+
+  it('going to new blog creation page and trying to submit without valid data shows an error', async () => {
+    const buttonElem = 'a.btn-floating';
+    const nextBtn = 'button.next-submit-btn';
+    const errorText = 'div.error-text';
+    await page.login(buttonElem, '/blogs');
+    await page.click(buttonElem);
+    await page.click(nextBtn);
+    const text = await page.getContents(errorText);
+    expect(text.trim()).toEqual('You must provide a value');
+  });
 });
