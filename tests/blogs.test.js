@@ -24,16 +24,11 @@ describe('blogs', () => {
   });
 
   it('user flow of going to the new blog creation page works', async () => {
-    await page.login(null, '/blogs');
-    // await page.goto('localhost:3000/blogs');
-    // const myBlogsElem = 'a.my-blogs-link';
-    // const buttonElem = 'a.btn-large';
-    // const targetElem = 'div.title label';
-    // await page.login(myBlogsElem);
-    // await page.click(myBlogsElem);
-    // await page.waitFor(buttonElem);
-    // await page.click(buttonElem);
-    // const text = await page.getContents(targetElem);
-    // expect(text.trim()).toEqual('Blog Title');
+    const buttonElem = 'a.btn-floating';
+    await page.login(buttonElem, '/blogs');
+    const targetElem = 'div.title label';
+    await page.click(buttonElem);
+    const text = await page.getContents(targetElem);
+    expect(text.trim()).toEqual('Blog Title');
   });
 });
