@@ -36,18 +36,27 @@ describe('blogs', () => {
       expect(text.trim()).toEqual('Blog Title');
     });
 
-    it('going to new blog creation page and trying to submit without valid data shows an error', async () => {
-      const nextBtn = 'button.next-submit-btn';
-      const errorText = 'div.error-text';
-      await page.click(nextBtn);
-      const text = await page.getContents(errorText);
-      expect(text.trim()).toEqual('You must provide a value');
-    });
-
     it('clicking on cancel button in new blog creation page returns user to prior page', async () => {
       const cancelBtn = 'a.cancel-btn';
       await page.click(cancelBtn);
       page.testURL('/blogs$');
+    });
+
+    describe('And invalid input', async () => {
+      beforeEach(async () => {
+        // submit form with no data entered
+        const nextBtn = 'button.next-submit-btn';
+        await page.click(nextBtn);
+      });
+
+      it('going to new blog creation page and trying to submit without valid data shows an error', async () => {
+        const errorText1 = '.title .error-text';
+        const errorText2 = '.content .error-text';
+        const text1 = await page.getContents(errorText1);
+        expect(text1.trim()).toEqual('You must provide a value');
+        const text2 = await page.getContents(errorText2);
+        expect(text2.trim()).toEqual('You must provide a value');
+      });
     });
   });
 });
