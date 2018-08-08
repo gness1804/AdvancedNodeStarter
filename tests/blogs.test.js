@@ -49,7 +49,7 @@ describe('blogs', () => {
         await page.click(nextBtn);
       });
 
-      it('going to new blog creation page and trying to submit without valid data shows an error', async () => {
+      it('the form should show an error message', async () => {
         const errorText1 = '.title .error-text';
         const errorText2 = '.content .error-text';
         const text1 = await page.getContents(errorText1);
