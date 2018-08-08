@@ -58,5 +58,27 @@ describe('blogs', () => {
         expect(text2.trim()).toEqual('You must provide a value');
       });
     });
+
+    describe('And valid input', async () => {
+      beforeEach(async () => {
+        // submit form with valid data
+        const titleInputElem = '.title input';
+        const contentInputElem = '.content input';
+        const nextBtn = 'button.next-submit-btn';
+        await page.type(titleInputElem, 'Mal\'s big day out');
+        await page.type(contentInputElem, 'Mal had a great day out! He chased after bugs and made some new friends.');
+        await page.click(nextBtn);
+      });
+
+      it('submitting a post takes user to confirmation screen', async () => {
+        const elem = 'h5.form-review-headline';
+        const text = await page.getContents(elem);
+        expect(text.trim()).toEqual('Please confirm your entries');
+      });
+
+      // it('submitting a post and then saving adds a blog post to /blogs page', async () => {
+
+      // });
+    });
   });
 });
