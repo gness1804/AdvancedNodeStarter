@@ -1,3 +1,4 @@
+/* global expect */
 const puppeteer = require('puppeteer');
 const createSession = require('../config/login');
 const createUser = require('../config/user');
@@ -37,6 +38,12 @@ class CustomPage {
   async getContents(elem) {
     const target = await this.$eval(elem, el => el.innerHTML);
     return target;
+  }
+
+  async testURL(_regex) {
+    const url = await this.url();
+    const regex = new RegExp(_regex);
+    expect(regex.test(url)).toEqual(true);
   }
 
   constructor(page) {

@@ -47,9 +47,7 @@ describe('blogs', () => {
     it('clicking on cancel button in new blog creation page returns user to prior page', async () => {
       const cancelBtn = 'a.cancel-btn';
       await page.click(cancelBtn);
-      const url = await page.url();
-      const regex = new RegExp('/blogs$');
-      expect(regex.test(url)).toEqual(true);
+      page.testURL('/blogs$');
     });
   });
 });

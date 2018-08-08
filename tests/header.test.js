@@ -36,9 +36,7 @@ describe('Home page', () => {
 
   it('clicking on the log in link starts oauth flow', async () => {
     await page.click('a.login-link');
-    const url = await page.url();
-    const regex = new RegExp('^https://accounts.google.com');
-    expect(regex.test(url)).toEqual(true);
+    page.testURL('^https://accounts.google.com');
   });
 
   it('shows logout button when signed in', async () => {
