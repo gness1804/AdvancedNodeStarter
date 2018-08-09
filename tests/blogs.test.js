@@ -76,9 +76,18 @@ describe('blogs', () => {
         expect(text.trim()).toEqual('Please confirm your entries');
       });
 
-      // it('submitting a post and then saving adds a blog post to /blogs page', async () => {
-
-      // });
+      it('submitting a post and then saving adds a blog post to /blogs page', async () => {
+        const buttonElem = 'button.blog-save-button';
+        const titleElem = 'span.card-title';
+        const contentElem = 'p.card-content';
+        await page.click(buttonElem);
+        await page.waitFor('.card');
+        page.testURL('/blogs$');
+        const titleText = await page.getContents(titleElem);
+        const contentText = await page.getContents(contentElem);
+        expect(titleText.trim()).toEqual('Mal\'s big day out');
+        expect(contentText.trim()).toEqual('Mal had a great day out! He chased after bugs and made some new friends.');
+      });
     });
   });
 });
