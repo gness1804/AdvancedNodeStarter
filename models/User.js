@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   googleId: String,
   displayName: String,
+  isTest: Boolean,
 });
 
 mongoose.model('User', userSchema);
