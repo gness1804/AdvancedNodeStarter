@@ -1,4 +1,4 @@
-/* global jest, beforeAll */
+/* global jest, afterAll */
 
 require('../../models/User');
 require('../../models/Blog');
@@ -13,7 +13,8 @@ mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 jest.setTimeout(30000);
 
-beforeAll(async () => {
+// nuke all the test blog data after each test run
+afterAll(async () => {
   await User.deleteMany({
     displayName: 'Dwayne Johnson',
   });
