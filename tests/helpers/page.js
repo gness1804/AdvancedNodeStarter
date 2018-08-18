@@ -46,6 +46,18 @@ class CustomPage {
     expect(regex.test(url)).toEqual(true);
   }
 
+  getAPI(path) {
+    return this.page.evaluate((_path) => {
+      return fetch(_path, {
+        method: 'GET',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => res.json());
+    }, path);
+  }
+
   constructor(page) {
     this.page = page;
   }
