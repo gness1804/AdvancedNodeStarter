@@ -108,5 +108,18 @@ describe('blogs', () => {
       });
       expect(result).toEqual({ error: 'You must log in!' });
     });
+
+    it('user cannot get list of blogs', async () => {
+      const result = await page.evaluate(() => {
+        return fetch('/api/blogs', {
+          method: 'GET',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then(res => res.json());
+      });
+      expect(result).toEqual({ error: 'You must log in!' });
+    });
   });
 });
