@@ -22,10 +22,11 @@ const EachPost = ({blog}) => {
           <Link to={`/blogs/${blog._id}`}>Read</Link>
         </div>
         <button
+          className="delete-post-button"
           onClick={deletePost}
         >
           Delete
-            </button>
+        </button>
       </div>
     </div>
   );
