@@ -93,11 +93,11 @@ describe('blogs', () => {
 
   describe('User is not logged in', async () => {
     it('user cannot create blog posts', async () => {
-      const result = await page.postAPI({
-        path: '/api/blogs',
+      const data = {
         title: 'My New Blog',
         content: 'This is a new blog post.',
-      });
+      };
+      const result = await page.postAPI('/api/blogs', data);
       expect(result).toEqual({ error: 'You must log in!' });
     });
 

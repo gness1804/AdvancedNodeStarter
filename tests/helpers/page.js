@@ -58,22 +58,17 @@ class CustomPage {
     }, path);
   }
 
-  postAPI(opts) {
-    const { path, title, content } = opts;
-
-    return this.page.evaluate((_path, _title, _content) => {
+  postAPI(path, data) {
+    return this.page.evaluate((_path, _data) => {
       return fetch(_path, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          title: _title,
-          content: _content,
-        }),
+        body: JSON.stringify(_data),
       }).then(res => res.json());
-    }, path, title, content);
+    }, path, data);
   }
 
   constructor(page) {
