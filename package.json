@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "jest": {
+    "setupTestFrameworkScriptFile": "./tests/config/setup.js"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js --ignore tests",
@@ -13,7 +16,12 @@
     "cache:clean": "node services/redisClean.js",
     "lint": "eslint --ext .js .",
     "lint:fix": "npm run lint -- --fix",
-    "test": "echo 'No tests yet...'"
+    "test": "bash scripts/launchTests.sh",
+    "site:open": "open https://www.udemy.com/advanced-node-for-developers/learn/v4/content",
+    "test:killall": "pgrep 'Chromium' | xargs kill -sigterm && echo 'Closed Chromium windows.'",
+    "test:open": "echo 'open' > .TEST-STATUS && echo 'Leaving Chromium windows open.'",
+    "test:close": "echo 'close' > .TEST-STATUS && echo 'Closing Chromium windows.'",
+    "test:which": "echo 'Chromium windows status set to: '$(cat .TEST-STATUS)''"
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +39,7 @@
     "eslint-plugin-react": "^7.10.0",
     "express": "^4.15.3",
     "jest": "^22.1.4",
+    "keygrip": "^1.0.2",
     "migrate-mongoose": "^3.2.2",
     "mongoose": "^4.11.1",
     "nodemon": "^1.11.0",
@@ -39,6 +48,10 @@
     "path-parser": "^2.0.2",
     "puppeteer": "^1.0.0",
     "redis": "^2.8.0",
+    "safe-buffer": "^5.1.2",
     "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "sinon": "^6.1.4"
   }
 }

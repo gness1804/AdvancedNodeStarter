@@ -16,16 +16,17 @@ const EachPost = ({blog}) => {
       <div className="card-stacked">
         <div className="card-content">
           <span className="card-title">{blog.title}</span>
-          <p>{blog.content}</p>
+          <p className="card-content">{blog.content}</p>
         </div>
         <div className="card-action">
           <Link to={`/blogs/${blog._id}`}>Read</Link>
         </div>
         <button
+          className="delete-post-button"
           onClick={deletePost}
         >
           Delete
-            </button>
+        </button>
       </div>
     </div>
   );

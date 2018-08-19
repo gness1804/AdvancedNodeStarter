@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import RightLinks from './RightLinks';
+import LoggedInAsElem from './LoggedInAsElem';
 
 class Header extends Component {
   renderContent() {
@@ -12,7 +13,7 @@ class Header extends Component {
       case false:
         return (
           <li>
-            <a href={'/auth/google'}>Login With Google</a>
+            <a href={'/auth/google'} className="login-link">Login With Google</a>
           </li>
         );
       default:
@@ -32,7 +33,7 @@ class Header extends Component {
           >
             Blogster
           </Link>
-          {auth ? <p style={{ position: 'absolute', left: '300px' }}>Logged is as: {auth.displayName}</p> : ''}
+          {auth ? <LoggedInAsElem name={auth.displayName} /> : ''}
           <ul className="right">{this.renderContent()}</ul>
         </div>
       </nav>

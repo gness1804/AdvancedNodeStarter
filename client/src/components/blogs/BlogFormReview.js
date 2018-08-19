@@ -31,7 +31,7 @@ class BlogFormReview extends Component {
         >
           Back
         </button>
-        <button className="green btn-flat right white-text">
+        <button className="green btn-flat right white-text blog-save-button">
           Save Blog
           <i className="material-icons right">email</i>
         </button>
@@ -50,7 +50,7 @@ class BlogFormReview extends Component {
   render() {
     return (
       <form onSubmit={this.onSubmit.bind(this)}>
-        <h5>Please confirm your entries</h5>
+        <h5 className="form-review-headline">Please confirm your entries</h5>
         {this.renderFields()}
 
         {this.renderButtons()}

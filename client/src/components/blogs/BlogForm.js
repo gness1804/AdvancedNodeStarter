@@ -26,10 +26,10 @@ class BlogForm extends Component {
       <div>
         <form onSubmit={this.props.handleSubmit(this.props.onBlogSubmit)}>
           {this.renderFields()}
-          <Link to="/blogs" className="red btn-flat white-text">
+          <Link to="/blogs" className="red btn-flat white-text cancel-btn">
             Cancel
           </Link>
-          <button type="submit" className="teal btn-flat right white-text">
+          <button type="submit" className="teal btn-flat right white-text next-submit-btn">
             Next
             <i className="material-icons right">done</i>
           </button>
