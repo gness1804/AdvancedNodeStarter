@@ -7,4 +7,5 @@ module.exports = {
   mongoURI: process.env.MONGO_URI,
   cookieKey: process.env.COOKIE_KEY,
   mLabId: process.env.MLAB_USER_ID,
+  blogTestId: process.env.BLOG_TEST_ID,
 };

@@ -71,6 +71,18 @@ class CustomPage {
     }, path, data);
   }
 
+  deleteAPI(path) {
+    return this.page.evaluate((_path) => {
+      return fetch(_path, {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(res => res.json());
+    }, path);
+  }
+
   constructor(page) {
     this.page = page;
   }

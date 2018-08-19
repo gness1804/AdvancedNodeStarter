@@ -2,6 +2,7 @@
 
 const { execSync } = require('child_process');
 const Page = require('./helpers/page');
+const { blogTestId } = require('../config/keys');
 
 describe('blogs', () => {
   let page;
@@ -103,6 +104,11 @@ describe('blogs', () => {
 
     it('user cannot get list of blogs', async () => {
       const result = await page.getAPI('/api/blogs');
+      expect(result).toEqual({ error: 'You must log in!' });
+    });
+
+    it('user cannot delete a blog', async () => {
+      const result = await page.deleteAPI(`/api/blogs/${blogTestId}`);
       expect(result).toEqual({ error: 'You must log in!' });
     });
   });
