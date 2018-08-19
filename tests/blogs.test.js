@@ -94,21 +94,34 @@ describe('blogs', () => {
 
   describe('User is not logged in', async () => {
     it('user cannot create blog posts', async () => {
-      const data = {
+      const bodyData = {
         title: 'My New Blog',
         content: 'This is a new blog post.',
       };
-      const result = await page.postAPI('/api/blogs', data);
+      const opts = {
+        path: '/api/blogs',
+        method: 'POST',
+        bodyData,
+      };
+      const result = await page.hitAPI(opts);
       expect(result).toEqual({ error: 'You must log in!' });
     });
 
     it('user cannot get list of blogs', async () => {
-      const result = await page.getAPI('/api/blogs');
+      const opts = {
+        path: '/api/blogs',
+        method: 'GET',
+      };
+      const result = await page.hitAPI(opts);
       expect(result).toEqual({ error: 'You must log in!' });
     });
 
     it('user cannot delete a blog', async () => {
-      const result = await page.deleteAPI(`/api/blogs/${blogTestId}`);
+      const opts = {
+        path: `/api/blogs/${blogTestId}`,
+        method: 'DELETE',
+      };
+      const result = await page.hitAPI(opts);
       expect(result).toEqual({ error: 'You must log in!' });
     });
   });

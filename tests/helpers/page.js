@@ -46,41 +46,19 @@ class CustomPage {
     expect(regex.test(url)).toEqual(true);
   }
 
-  getAPI(path) {
-    return this.page.evaluate((_path) => {
-      return fetch(_path, {
-        method: 'GET',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(res => res.json());
-    }, path);
-  }
+  hitAPI(opts) {
+    const { path, method, bodyData } = opts;
 
-  postAPI(path, data) {
-    return this.page.evaluate((_path, _data) => {
+    return this.page.evaluate((_path, _method, _bodyData) => {
       return fetch(_path, {
-        method: 'POST',
+        method: _method,
         credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(_data),
+        body: JSON.stringify(_bodyData) || undefined,
       }).then(res => res.json());
-    }, path, data);
-  }
-
-  deleteAPI(path) {
-    return this.page.evaluate((_path) => {
-      return fetch(_path, {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(res => res.json());
-    }, path);
+    }, path, method, bodyData);
   }
 
   constructor(page) {
