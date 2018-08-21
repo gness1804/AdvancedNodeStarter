@@ -8,4 +8,5 @@ module.exports = {
   cookieKey: process.env.COOKIE_KEY,
   mLabId: process.env.MLAB_USER_ID,
   blogTestId: process.env.BLOG_TEST_ID,
+  redisUrl: process.env.REDIS_URL,
 };
