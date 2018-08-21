@@ -21,7 +21,8 @@
     "test:killall": "pgrep 'Chromium' | xargs kill -sigterm && echo 'Closed Chromium windows.'",
     "test:open": "echo 'open' > .TEST-STATUS && echo 'Leaving Chromium windows open.'",
     "test:close": "echo 'close' > .TEST-STATUS && echo 'Closing Chromium windows.'",
-    "test:which": "echo 'Chromium windows status set to: '$(cat .TEST-STATUS)''"
+    "test:which": "echo 'Chromium windows status set to: '$(cat .TEST-STATUS)''",
+    "test:ci": "jest"
   },
   "author": "",
   "license": "ISC",
