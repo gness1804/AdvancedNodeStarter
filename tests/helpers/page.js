@@ -30,7 +30,7 @@ class CustomPage {
       name: 'session.sig',
       value: sig,
     });
-    await this.goto(`localhost:3000${route || ''}`);
+    await this.goto(`http://localhost:3000${route || ''}`);
     if (elem) {
       await this.waitFor(elem);
     }
