@@ -25,4 +25,5 @@ script:
 - echo "close" > .TEST-STATUS
 - nohup npm run start &
 - sleep 3
+- npm run lint
 - npm run test:ci
