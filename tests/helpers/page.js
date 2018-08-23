@@ -6,7 +6,8 @@ const createUser = require('../config/user');
 class CustomPage {
   static async build() {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: process.env.NODE_ENV === 'ci',
+      args: ['--no-sandbox'],
     });
     const page = await browser.newPage();
     const customPage = new CustomPage(page);
@@ -29,7 +30,7 @@ class CustomPage {
       name: 'session.sig',
       value: sig,
     });
-    await this.goto(`localhost:3000${route || ''}`);
+    await this.goto(`http://localhost:3000${route || ''}`);
     if (elem) {
       await this.waitFor(elem);
     }
