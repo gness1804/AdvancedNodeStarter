@@ -52,7 +52,11 @@ class BlogFormReview extends Component {
       <form onSubmit={this.onSubmit.bind(this)}>
         <h5 className="form-review-headline">Please confirm your entries</h5>
         {this.renderFields()}
-
+        <h6><strong>Add an Image</strong></h6>
+        <input
+          type="file"
+          accept="image/*"
+        />
         {this.renderButtons()}
       </form>
     );
