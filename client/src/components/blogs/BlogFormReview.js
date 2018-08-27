@@ -7,6 +7,13 @@ import formFields from './formFields';
 import * as actions from '../../actions';
 
 class BlogFormReview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: null,
+    };
+  }
+
   renderFields() {
     const { formValues } = this.props;
 
@@ -40,11 +47,20 @@ class BlogFormReview extends Component {
   }
 
   onSubmit(event) {
+    const { file } = this.state;
+
     event.preventDefault();
 
     const { submitBlog, history, formValues } = this.props;
 
-    submitBlog(formValues, history);
+    submitBlog(formValues, file, history);
+  }
+
+  onFileChange(event) {
+    const file = event.target.files[0];
+    this.setState({
+      file,
+    });
   }
 
   render() {
@@ -56,6 +72,7 @@ class BlogFormReview extends Component {
         <input
           type="file"
           accept="image/*"
+          onChange={this.onFileChange.bind(this)}
         />
         {this.renderButtons()}
       </form>
