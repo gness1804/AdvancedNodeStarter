@@ -9,4 +9,6 @@ module.exports = {
   mLabId: process.env.MLAB_USER_ID,
   blogTestId: process.env.BLOG_TEST_ID,
   redisUrl: process.env.REDIS_URL,
+  awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  awsSecretKey: process.env.AWS_SECRET_KEY,
 };
