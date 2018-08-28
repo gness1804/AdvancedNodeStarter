@@ -27,7 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.188.0",
+    "aws-sdk": "^2.303.0",
     "babel-eslint": "^8.2.6",
     "body-parser": "^1.17.2",
     "concurrently": "^3.5.0",
