@@ -1,5 +1,7 @@
 const { S3 } = require('aws-sdk');
-const { awsAccessKeyId, awsSecretKey } = require('../config/keys');
+const uuid = require('uuid/v1');
+const { awsAccessKeyId, awsSecretKey, awsBucketName } = require('../config/keys');
+const requireLogin = require('../middlewares/requireLogin');
 
 const s3 = new S3({
   accessKeyId: awsAccessKeyId,
@@ -7,9 +9,16 @@ const s3 = new S3({
 });
 
 const uploadImage = (app) => {
-  return app.get('/api/upload', (req, res) => {
-    // dummy response just to shut up the linter
-    res.send(s3);
+  return app.get('/api/upload', requireLogin, (req, res) => {
+    const key = `${req.user.id}/${uuid()}.jpeg`;
+
+    s3.getSignedUrl('putObject', {
+      Bucket: awsBucketName,
+      Key: key,
+      ContentType: 'jpeg',
+    }, (err, url) => {
+      res.send({ key, url });
+    });
   });
 };
 
