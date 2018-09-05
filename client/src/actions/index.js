@@ -13,8 +13,21 @@ export const handleToken = token => async (dispatch) => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-// we don't do anything with the file param yet. We need to hook it up to AWS.
 export const submitBlog = (values, file, history) => async (dispatch) => {
+  const uploadConfig = await axios.get('/api/upload').catch((err) => {
+    throw new Error(`Error in getting key to upload image: ${err}.`);
+  });
+
+  const { url, key } = uploadConfig.data;
+
+  await axios.put(url, file, {
+    headers: {
+      'Content-Type': file.type,
+    },
+  }).catch((err) => {
+    throw new Error(`Error in uploading image file: ${err}.`);
+  });
+
   const res = await axios.post('/api/blogs', values);
 
   history.push('/blogs');

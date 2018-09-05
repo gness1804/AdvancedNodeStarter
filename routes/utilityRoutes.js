@@ -15,7 +15,7 @@ const uploadImage = (app) => {
     s3.getSignedUrl('putObject', {
       Bucket: awsBucketName,
       Key: key,
-      ContentType: 'jpeg',
+      ContentType: 'image/jpeg',
     }, (err, url) => {
       res.send({ key, url });
     });

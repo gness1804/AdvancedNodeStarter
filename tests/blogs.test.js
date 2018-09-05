@@ -77,7 +77,7 @@ describe('blogs', () => {
         expect(text.trim()).toEqual('Please confirm your entries');
       });
 
-      it('submitting a post and then saving adds a blog post to /blogs page', async () => {
+      it.skip('submitting a post and then saving adds a blog post to /blogs page', async () => {
         const buttonElem = 'button.blog-save-button';
         const titleElem = 'span.card-title';
         const contentElem = 'p.card-content';
