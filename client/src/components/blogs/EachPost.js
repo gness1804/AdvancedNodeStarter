@@ -9,6 +9,9 @@ const EachPost = ({blog}) => {
     .then(() => {
       window.location.reload();
     })
+    .catch((err) => {
+      throw new Error(`Error deleting blog post ${_id}: ${err}.`);
+    });
   }
 
   return (
