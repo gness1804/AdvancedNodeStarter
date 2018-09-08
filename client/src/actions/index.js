@@ -28,7 +28,7 @@ export const submitBlog = (values, file, history) => async (dispatch) => {
       throw new Error(`Error in getting key to upload image: ${err}.`);
     });
 
-  const { url } = uploadConfig.data;
+  const { url, key } = uploadConfig.data;
 
   await axios
     .put(url, file, {
@@ -40,8 +40,13 @@ export const submitBlog = (values, file, history) => async (dispatch) => {
       throw new Error(`Error in uploading image file: ${err}.`);
     });
 
+  const updatedValues = {
+      ...values,
+    imageUrl: key,
+  };
+
   const res = await axios
-    .post('/api/blogs', values)
+    .post('/api/blogs', updatedValues)
     .catch((err) => {
       throw new Error(`Error in posting blog post: ${err}`);
     });
