@@ -5,8 +5,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import formFields from './formFields';
 import * as actions from '../../actions';
+import FileUpload from './FileUpload';
 
 class BlogFormReview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: null,
+    };
+  }
+
   renderFields() {
     const { formValues } = this.props;
 
@@ -40,11 +48,19 @@ class BlogFormReview extends Component {
   }
 
   onSubmit(event) {
+    const { file } = this.state;
+
     event.preventDefault();
 
     const { submitBlog, history, formValues } = this.props;
 
-    submitBlog(formValues, history);
+    submitBlog(formValues, file, history);
+  }
+
+  onFileChange(file) {
+    this.setState({
+      file,
+    });
   }
 
   render() {
@@ -52,7 +68,9 @@ class BlogFormReview extends Component {
       <form onSubmit={this.onSubmit.bind(this)}>
         <h5 className="form-review-headline">Please confirm your entries</h5>
         {this.renderFields()}
-
+       <FileUpload
+        onFileChange={this.onFileChange.bind(this)}
+       />
         {this.renderButtons()}
       </form>
     );
