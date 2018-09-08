@@ -10,7 +10,7 @@ class BlogShow extends Component {
   showImage() {
     const { blog: { imageUrl }} = this.props;
     if (imageUrl) {
-      return <img src={`https://s3.amazonaws.com/blogster-store/${imageUrl}`} alt="The blog image." />
+      return <img src={`https://s3.amazonaws.com/blogster-store/${imageUrl}`} alt="The blog foo." />
     }
   }
 
