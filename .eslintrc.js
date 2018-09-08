@@ -36,12 +36,11 @@ module.exports = {
     // React-specific rules: delete if not using React
     'react/prefer-stateless-function': 'off',
     'react/jsx-filename-extension': 'off',
-    'arrow-body-style': 'off',
     'react/prop-types': 'off',
     'react/jsx-equals-spacing': 'off',
-    'no-alert': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/jsx-no-bind': 'off',
+    'jsx-a11y/img-redundant-alt': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
